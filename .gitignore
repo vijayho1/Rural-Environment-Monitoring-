@@ -1,0 +1,12 @@
+# Build outputs
+firmware/.pio/
+firmware/build/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Temporary files
+*.tmp
+*.log
