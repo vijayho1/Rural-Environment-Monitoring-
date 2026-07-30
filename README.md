@@ -4,7 +4,8 @@ This project documents an ESP32-based environmental monitoring node for rural or
 
 ## Quick Links
 
-- [BOM](hardware/bom.xlsx)
+- [BOM](https://viridian-path-34d.notion.site/Aakashvani-3adc78e01c3d80f9a7f2f4c04ff93067?source=copy_link)
+[Circuit Design](https://app.cirkitdesigner.com/project/72f4accd-b4bb-4687-a699-8c45e1bc3c0c)
 - [Component List](hardware/component_list.md)
 - [Pin Connections](hardware/pin_connections.md)
 - [Circuit Schematic](docs/circuit/schematic.pdf)
