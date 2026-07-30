@@ -1,43 +1,69 @@
 # Ultra-Low-Power IoT Environmental Monitor
 
-This repository contains the scaffold for an ultra-low-power environmental monitoring node for rural deployments. The project is organized around documentation, firmware, hardware references, simulation assets, images, and results.
+This project documents an ESP32-based environmental monitoring node for rural or remote deployments. The system reads temperature, humidity, and particulate-matter data, performs basic edge processing, and transmits events or summaries over LoRa or MQTT while minimizing power use.
 
-## What’s Included
+## Quick Links
 
-The current repository structure includes:
+- [BOM](hardware/bom.xlsx)
+- [Component List](hardware/component_list.md)
+- [Pin Connections](hardware/pin_connections.md)
+- [Circuit Schematic](docs/circuit/schematic.pdf)
+- [Wiring Diagram](docs/circuit/wiring_diagram.png)
+- [System Architecture](docs/architecture/system_architecture.png)
+- [Firmware Flowchart](docs/architecture/firmware_flowchart.png)
+- [Communication Flow](docs/architecture/communication_flow.png)
+- [Power Budget](docs/power/power_budget.pdf)
+- [Battery Life Calculation](docs/power/battery_life_calculation.xlsx)
+- [Current Consumption Table](docs/power/current_consumption_table.pdf)
 
-- `docs/architecture/` for system, firmware, and communication diagrams
-- `docs/circuit/` for the schematic and wiring assets
-- `docs/power/` for battery and current-consumption analysis
-- `docs/datasheets/` for component datasheets
-- `hardware/` for the BOM, pin mapping, and component list
-- `firmware/` for the PlatformIO project and source files
-- `simulations/` for Proteus, Wokwi, and simulation outputs
-- `images/` for prototype and demo media
-- `results/` for logs, CSV data, and reports
-- `presentation/` for slides and poster materials
+## Project Overview
 
-## Flowchart
+The repository is organized so the top-level README acts as the entry point, while the supporting files live in focused folders:
 
-The device flowchart should live in `docs/architecture/firmware_flowchart.png`. It documents the wake-up, sensor read, edge processing, threshold check, MQTT/LoRa transmission, backend handoff, and deep-sleep cycle.
+- `hardware/` contains the BOM, component notes, and pin mapping
+- `docs/architecture/` contains the flowcharts and system diagrams
+- `docs/circuit/` contains the schematic and wiring references
+- `docs/power/` contains power analysis and battery-life documents
+- `docs/datasheets/` contains component datasheets
+- `firmware/` contains the PlatformIO project and source code
+- `simulations/` contains simulation projects and outputs
+- `images/` contains prototype and demo media
+- `results/` contains logs, captured data, and reports
+- `presentation/` contains slides and poster files
 
-## Project Goal
+## How The System Works
 
-The prototype is intended to measure environmental conditions such as temperature, humidity, and particulate matter while keeping power consumption low through sleep modes and short communication bursts.
+1. The device wakes from deep sleep.
+2. Sensors are powered and read.
+3. The firmware performs edge processing and packages the data.
+4. The threshold check decides whether to send normal data or an alert.
+5. Data is transmitted via MQTT or LoRa.
+6. The backend can store the data in a database and surface it on a dashboard.
+7. The device returns to deep sleep to preserve battery life.
 
-## Hardware Reference
+The flowchart for this behavior is stored in [docs/architecture/firmware_flowchart.png](docs/architecture/firmware_flowchart.png).
 
-The repository is set up to document an ESP32-based prototype with sensors and a LoRa radio module. See the hardware notes and component list in `hardware/` and the circuit references in `docs/circuit/`.
+## Hardware Summary
+
+The prototype is documented around an ESP32, DHT11 for temperature and humidity, GP2Y1014 for particulate sensing, SX1278 for LoRa communication, and TP4056 for battery charging. The BOM and component references are kept in the `hardware/` folder.
 
 ## Firmware
 
-Firmware sources live under `firmware/src/`, with `firmware/platformio.ini` providing the PlatformIO configuration.
+Firmware sources live under `firmware/src/`, with `firmware/platformio.ini` providing the PlatformIO configuration. The folder is structured so each concern can be maintained separately:
+
+- `main.cpp` for the application entry point
+- `sensors.cpp` for sensor handling
+- `lora.cpp` for LoRa communication
+- `mqtt.cpp` for MQTT publishing
+- `power.cpp` for power management
+- `battery.cpp` for battery monitoring
 
 ## Getting Started
 
-1. Clone the repository.
-2. Open the `firmware/` folder in PlatformIO.
-3. Review the documents in `docs/` and the wiring notes in `hardware/pin_connections.md`.
+1. Open the repository in VS Code.
+2. Review the BOM and hardware notes at the top of this README.
+3. Open `firmware/` in PlatformIO to work on the embedded code.
+4. Use the diagrams in `docs/architecture/` and `docs/circuit/` as the reference for wiring and data flow.
 
 ## License
 
